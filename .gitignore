@@ -27,7 +27,9 @@ hs_err_pid*
 ## Plugin-specific files:
 
 # IntelliJ
+.idea/
 /out/
+*.iml
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
