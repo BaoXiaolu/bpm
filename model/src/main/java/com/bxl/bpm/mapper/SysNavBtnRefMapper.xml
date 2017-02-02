@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bxl.bpm.dao.SysNavBtnRefMapper" >
+  <resultMap id="BaseResultMap" type="com.bxl.bpm.model.SysNavBtnRef" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="nav_id" property="navId" jdbcType="INTEGER" />
+    <result column="btn_id" property="btnId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, nav_id, btn_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bxl.bpm.model.SysNavBtnRefExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_nav_btn
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.bxl.bpm.model.SysNavBtnRefExample" >
+    delete from sys_nav_btn
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bxl.bpm.model.SysNavBtnRef" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
+      CALL GetSEQUENCE()
+    </selectKey>
+    insert into sys_nav_btn (id, nav_id, btn_id
+      )
+    values (#{id,jdbcType=INTEGER}, #{navId,jdbcType=INTEGER}, #{btnId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bxl.bpm.model.SysNavBtnRef" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
+      CALL GetSEQUENCE()
+    </selectKey>
+    insert into sys_nav_btn
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      id,
+      <if test="navId != null" >
+        nav_id,
+      </if>
+      <if test="btnId != null" >
+        btn_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{id,jdbcType=INTEGER},
+      <if test="navId != null" >
+        #{navId,jdbcType=INTEGER},
+      </if>
+      <if test="btnId != null" >
+        #{btnId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bxl.bpm.model.SysNavBtnRefExample" resultType="java.lang.Integer" >
+    select count(*) from sys_nav_btn
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_nav_btn
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.navId != null" >
+        nav_id = #{record.navId,jdbcType=INTEGER},
+      </if>
+      <if test="record.btnId != null" >
+        btn_id = #{record.btnId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_nav_btn
+    set id = #{record.id,jdbcType=INTEGER},
+      nav_id = #{record.navId,jdbcType=INTEGER},
+      btn_id = #{record.btnId,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bxl.bpm.dao.LogMapper" >
+  <resultMap id="BaseResultMap" type="com.bxl.bpm.model.Log" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="operation_type" property="operationType" jdbcType="INTEGER" />
+    <result column="operator" property="operatorId" jdbcType="INTEGER" />
+    <result column="operation_time" property="operationTime" jdbcType="TIMESTAMP" />
+    <result column="tablename" property="tableName" jdbcType="VARCHAR" />
+    <result column="biz_name" property="bizName" jdbcType="VARCHAR" />
+    <result column="biz_keyvalue" property="bizKeyValue" jdbcType="VARCHAR" />
+    <result column="biz_sql" property="bizSql" jdbcType="VARCHAR" />
+    <result column="operation_ip" property="operationIp" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, operation_type, operator, operation_time, tablename, biz_name, biz_keyvalue, 
+    biz_sql, operation_ip
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bxl.bpm.model.LogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_logs
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.bxl.bpm.model.LogExample" >
+    delete from sys_logs
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bxl.bpm.model.Log" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
+      CALL GetSEQUENCE()
+    </selectKey>
+    insert into sys_logs (id, operation_type, operator, 
+      operation_time, tablename, biz_name, 
+      biz_keyvalue, biz_sql, operation_ip
+      )
+    values (#{id,jdbcType=INTEGER}, #{operationType,jdbcType=INTEGER}, #{operatorId,jdbcType=INTEGER}, 
+      #{operationTime,jdbcType=TIMESTAMP}, #{tableName,jdbcType=VARCHAR}, #{bizName,jdbcType=VARCHAR}, 
+      #{bizKeyValue,jdbcType=VARCHAR}, #{bizSql,jdbcType=VARCHAR}, #{operationIp,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bxl.bpm.model.Log" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
+      CALL GetSEQUENCE()
+    </selectKey>
+    insert into sys_logs
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      id,
+      <if test="operationType != null" >
+        operation_type,
+      </if>
+      <if test="operatorId != null" >
+        operator,
+      </if>
+      <if test="operationTime != null" >
+        operation_time,
+      </if>
+      <if test="tableName != null" >
+        tablename,
+      </if>
+      <if test="bizName != null" >
+        biz_name,
+      </if>
+      <if test="bizKeyValue != null" >
+        biz_keyvalue,
+      </if>
+      <if test="bizSql != null" >
+        biz_sql,
+      </if>
+      <if test="operationIp != null" >
+        operation_ip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{id,jdbcType=INTEGER},
+      <if test="operationType != null" >
+        #{operationType,jdbcType=INTEGER},
+      </if>
+      <if test="operatorId != null" >
+        #{operatorId,jdbcType=INTEGER},
+      </if>
+      <if test="operationTime != null" >
+        #{operationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tableName != null" >
+        #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="bizName != null" >
+        #{bizName,jdbcType=VARCHAR},
+      </if>
+      <if test="bizKeyValue != null" >
+        #{bizKeyValue,jdbcType=VARCHAR},
+      </if>
+      <if test="bizSql != null" >
+        #{bizSql,jdbcType=VARCHAR},
+      </if>
+      <if test="operationIp != null" >
+        #{operationIp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bxl.bpm.model.LogExample" resultType="java.lang.Integer" >
+    select count(*) from sys_logs
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_logs
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.operationType != null" >
+        operation_type = #{record.operationType,jdbcType=INTEGER},
+      </if>
+      <if test="record.operatorId != null" >
+        operator = #{record.operatorId,jdbcType=INTEGER},
+      </if>
+      <if test="record.operationTime != null" >
+        operation_time = #{record.operationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tableName != null" >
+        tablename = #{record.tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bizName != null" >
+        biz_name = #{record.bizName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bizKeyValue != null" >
+        biz_keyvalue = #{record.bizKeyValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bizSql != null" >
+        biz_sql = #{record.bizSql,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operationIp != null" >
+        operation_ip = #{record.operationIp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_logs
+    set id = #{record.id,jdbcType=INTEGER},
+      operation_type = #{record.operationType,jdbcType=INTEGER},
+      operator = #{record.operatorId,jdbcType=INTEGER},
+      operation_time = #{record.operationTime,jdbcType=TIMESTAMP},
+      tablename = #{record.tableName,jdbcType=VARCHAR},
+      biz_name = #{record.bizName,jdbcType=VARCHAR},
+      biz_keyvalue = #{record.bizKeyValue,jdbcType=VARCHAR},
+      biz_sql = #{record.bizSql,jdbcType=VARCHAR},
+      operation_ip = #{record.operationIp,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

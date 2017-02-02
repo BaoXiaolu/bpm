@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bxl.bpm.dao.SysNavigationMapper" >
+  <resultMap id="BaseResultMap" type="com.bxl.bpm.model.SysNavigation" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="application_id" property="appId" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="parent_id" property="pid" jdbcType="INTEGER" />
+    <result column="icon_cls" property="iconCls" jdbcType="VARCHAR" />
+    <result column="icon_url" property="iconUrl" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="is_visible" property="isVisible" jdbcType="BIT" />
+    <result column="creater" property="createrId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="modifier" property="modifierId" jdbcType="INTEGER" />
+    <result column="modified_time" property="modifiedTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, application_id, name, code, parent_id, icon_cls, icon_url, sort, remark, is_visible, 
+    creater, create_time, modifier, modified_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bxl.bpm.model.SysNavigationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_navigation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.bxl.bpm.model.SysNavigationExample" >
+    delete from sys_navigation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bxl.bpm.model.SysNavigation" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
+      CALL GetSEQUENCE()
+    </selectKey>
+    insert into sys_navigation (id, application_id, name, 
+      code, parent_id, icon_cls, 
+      icon_url, sort, remark, 
+      is_visible, creater, create_time, 
+      modifier, modified_time)
+    values (#{id,jdbcType=INTEGER}, #{appId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{code,jdbcType=VARCHAR}, #{pid,jdbcType=INTEGER}, #{iconCls,jdbcType=VARCHAR}, 
+      #{iconUrl,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
+      #{isVisible,jdbcType=BIT}, #{createrId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{modifierId,jdbcType=INTEGER}, #{modifiedTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bxl.bpm.model.SysNavigation" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
+      CALL GetSEQUENCE()
+    </selectKey>
+    insert into sys_navigation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      id,
+      <if test="appId != null" >
+        application_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="pid != null" >
+        parent_id,
+      </if>
+      <if test="iconCls != null" >
+        icon_cls,
+      </if>
+      <if test="iconUrl != null" >
+        icon_url,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="isVisible != null" >
+        is_visible,
+      </if>
+      <if test="createrId != null" >
+        creater,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="modifierId != null" >
+        modifier,
+      </if>
+      <if test="modifiedTime != null" >
+        modified_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{id,jdbcType=INTEGER},
+      <if test="appId != null" >
+        #{appId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="iconCls != null" >
+        #{iconCls,jdbcType=VARCHAR},
+      </if>
+      <if test="iconUrl != null" >
+        #{iconUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="isVisible != null" >
+        #{isVisible,jdbcType=BIT},
+      </if>
+      <if test="createrId != null" >
+        #{createrId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifierId != null" >
+        #{modifierId,jdbcType=INTEGER},
+      </if>
+      <if test="modifiedTime != null" >
+        #{modifiedTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bxl.bpm.model.SysNavigationExample" resultType="java.lang.Integer" >
+    select count(*) from sys_navigation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_navigation
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.appId != null" >
+        application_id = #{record.appId,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.code != null" >
+        code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pid != null" >
+        parent_id = #{record.pid,jdbcType=INTEGER},
+      </if>
+      <if test="record.iconCls != null" >
+        icon_cls = #{record.iconCls,jdbcType=VARCHAR},
+      </if>
+      <if test="record.iconUrl != null" >
+        icon_url = #{record.iconUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null" >
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isVisible != null" >
+        is_visible = #{record.isVisible,jdbcType=BIT},
+      </if>
+      <if test="record.createrId != null" >
+        creater = #{record.createrId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifierId != null" >
+        modifier = #{record.modifierId,jdbcType=INTEGER},
+      </if>
+      <if test="record.modifiedTime != null" >
+        modified_time = #{record.modifiedTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_navigation
+    set id = #{record.id,jdbcType=INTEGER},
+      application_id = #{record.appId,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      code = #{record.code,jdbcType=VARCHAR},
+      parent_id = #{record.pid,jdbcType=INTEGER},
+      icon_cls = #{record.iconCls,jdbcType=VARCHAR},
+      icon_url = #{record.iconUrl,jdbcType=VARCHAR},
+      sort = #{record.sort,jdbcType=INTEGER},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      is_visible = #{record.isVisible,jdbcType=BIT},
+      creater = #{record.createrId,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      modifier = #{record.modifierId,jdbcType=INTEGER},
+      modified_time = #{record.modifiedTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
