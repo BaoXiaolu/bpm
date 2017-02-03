@@ -3,9 +3,11 @@ package com.bxl.bpm.dao;
 import com.bxl.bpm.model.SysButton;
 import com.bxl.bpm.model.SysButtonExample;
 import java.util.List;
+
+import com.bxl.common.generic.GenericDao;
 import org.apache.ibatis.annotations.Param;
 
-public interface SysButtonMapper {
+public interface SysButtonMapper extends GenericDao<SysButton, Integer> {
     int countByExample(SysButtonExample example);
 
     int deleteByExample(SysButtonExample example);

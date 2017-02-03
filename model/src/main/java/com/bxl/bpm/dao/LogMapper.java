@@ -3,9 +3,11 @@ package com.bxl.bpm.dao;
 import com.bxl.bpm.model.Log;
 import com.bxl.bpm.model.LogExample;
 import java.util.List;
+
+import com.bxl.common.generic.GenericDao;
 import org.apache.ibatis.annotations.Param;
 
-public interface LogMapper {
+public interface LogMapper extends GenericDao<Log, Integer> {
     int countByExample(LogExample example);
 
     int deleteByExample(LogExample example);

@@ -3,9 +3,11 @@ package com.bxl.bpm.dao;
 import com.bxl.bpm.model.UserAppRef;
 import com.bxl.bpm.model.UserAppRefExample;
 import java.util.List;
+
+import com.bxl.common.generic.GenericDao;
 import org.apache.ibatis.annotations.Param;
 
-public interface UserAppRefMapper {
+public interface UserAppRefMapper extends GenericDao<UserAppRef, Integer> {
     int countByExample(UserAppRefExample example);
 
     int deleteByExample(UserAppRefExample example);

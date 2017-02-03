@@ -3,9 +3,11 @@ package com.bxl.bpm.dao;
 import com.bxl.bpm.model.SysNavigation;
 import com.bxl.bpm.model.SysNavigationExample;
 import java.util.List;
+
+import com.bxl.common.generic.GenericDao;
 import org.apache.ibatis.annotations.Param;
 
-public interface SysNavigationMapper {
+public interface SysNavigationMapper extends GenericDao<SysNavigation, Integer> {
     int countByExample(SysNavigationExample example);
 
     int deleteByExample(SysNavigationExample example);

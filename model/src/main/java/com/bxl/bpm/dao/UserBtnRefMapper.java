@@ -3,9 +3,11 @@ package com.bxl.bpm.dao;
 import com.bxl.bpm.model.UserBtnRef;
 import com.bxl.bpm.model.UserBtnRefExample;
 import java.util.List;
+
+import com.bxl.common.generic.GenericDao;
 import org.apache.ibatis.annotations.Param;
 
-public interface UserBtnRefMapper {
+public interface UserBtnRefMapper extends GenericDao<UserBtnRef, Integer> {
     int countByExample(UserBtnRefExample example);
 
     int deleteByExample(UserBtnRefExample example);

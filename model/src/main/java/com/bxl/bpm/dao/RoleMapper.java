@@ -3,9 +3,11 @@ package com.bxl.bpm.dao;
 import com.bxl.bpm.model.Role;
 import com.bxl.bpm.model.RoleExample;
 import java.util.List;
+
+import com.bxl.common.generic.GenericDao;
 import org.apache.ibatis.annotations.Param;
 
-public interface RoleMapper {
+public interface RoleMapper extends GenericDao<Role, Integer> {
     int countByExample(RoleExample example);
 
     int deleteByExample(RoleExample example);
