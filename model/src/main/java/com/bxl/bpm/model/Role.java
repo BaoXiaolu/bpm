@@ -60,4 +60,65 @@ public class Role {
     public void setIsDefault(Boolean isDefault) {
         this.isDefault = isDefault;
     }
+
+    public static final class Builder {
+        private Integer id;
+        private String name;
+        private String code;
+        private Integer sort;
+        private String remark;
+        private Boolean isDefault;
+
+        private Builder() {
+        }
+
+        public static Builder aRole() {
+            return new Builder();
+        }
+
+        public Builder id(Integer id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder code(String code) {
+            this.code = code;
+            return this;
+        }
+
+        public Builder sort(Integer sort) {
+            this.sort = sort;
+            return this;
+        }
+
+        public Builder remark(String remark) {
+            this.remark = remark;
+            return this;
+        }
+
+        public Builder isDefault(Boolean isDefault) {
+            this.isDefault = isDefault;
+            return this;
+        }
+
+        public Builder but() {
+            return aRole().id(id).name(name).code(code).sort(sort).remark(remark).isDefault(isDefault);
+        }
+
+        public Role build() {
+            Role role = new Role();
+            role.setId(id);
+            role.setName(name);
+            role.setCode(code);
+            role.setSort(sort);
+            role.setRemark(remark);
+            role.setIsDefault(isDefault);
+            return role;
+        }
+    }
 }
