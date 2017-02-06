@@ -1,16 +1,42 @@
 package com.bxl.bpm.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.NotNull;
+
+/**
+ * 系统角色
+ */
 public class Role {
     private Integer id;
 
+    /**
+     * 角色名称
+     */
+    @NotEmpty
     private String name;
 
+    /**
+     * 角色代码
+     */
+    @NotEmpty
     private String code;
 
+    /**
+     * 排序
+     */
+    @NotNull
     private Integer sort;
 
+    /**
+     * 备注
+     */
     private String remark;
 
+    /**
+     * 是否默认角色
+     */
+    @NotNull
     private Boolean isDefault;
 
     public Integer getId() {
@@ -42,7 +68,7 @@ public class Role {
     }
 
     public void setSort(Integer sort) {
-        this.sort = sort;
+        this.sort = sort == null ? 99 : sort;
     }
 
     public String getRemark() {
@@ -58,7 +84,7 @@ public class Role {
     }
 
     public void setIsDefault(Boolean isDefault) {
-        this.isDefault = isDefault;
+        this.isDefault = isDefault == null ? false : isDefault;
     }
 
     public static final class Builder {

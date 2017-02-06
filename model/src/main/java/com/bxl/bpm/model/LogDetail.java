@@ -1,12 +1,27 @@
 package com.bxl.bpm.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.NotNull;
+import java.sql.Timestamp;
 import java.util.Date;
 
+/**
+ * 数据日志
+ */
 public class LogDetail {
     private Integer id;
 
+    /**
+     * 操作日志Id
+     */
+    @NotNull
     private Integer logId;
 
+    /**
+     * 字段名
+     */
+    @NotEmpty
     private String fieldName;
 
     private String oldValue;
@@ -15,6 +30,10 @@ public class LogDetail {
 
     private String remark;
 
+    /**
+     * 操作时间
+     */
+    @NotNull
     private Date operationTime;
 
     public Integer getId() {
@@ -70,6 +89,6 @@ public class LogDetail {
     }
 
     public void setOperationTime(Date operationTime) {
-        this.operationTime = operationTime;
+        this.operationTime = operationTime == null ? new Timestamp(System.currentTimeMillis()) : operationTime;
     }
 }

@@ -12,13 +12,21 @@ public interface RoleAppRefMapper extends GenericDao<RoleAppRef, Integer> {
 
     int deleteByExample(RoleAppRefExample example);
 
+    int deleteByPrimaryKey(Integer id);
+
     int insert(RoleAppRef record);
 
     int insertSelective(RoleAppRef record);
 
     List<RoleAppRef> selectByExample(RoleAppRefExample example);
 
+    RoleAppRef selectByPrimaryKey(Integer id);
+
     int updateByExampleSelective(@Param("record") RoleAppRef record, @Param("example") RoleAppRefExample example);
 
     int updateByExample(@Param("record") RoleAppRef record, @Param("example") RoleAppRefExample example);
+
+    int updateByPrimaryKeySelective(RoleAppRef record);
+
+    int updateByPrimaryKey(RoleAppRef record);
 }

@@ -12,13 +12,21 @@ public interface UserBtnRefMapper extends GenericDao<UserBtnRef, Integer> {
 
     int deleteByExample(UserBtnRefExample example);
 
+    int deleteByPrimaryKey(Integer id);
+
     int insert(UserBtnRef record);
 
     int insertSelective(UserBtnRef record);
 
     List<UserBtnRef> selectByExample(UserBtnRefExample example);
 
+    UserBtnRef selectByPrimaryKey(Integer id);
+
     int updateByExampleSelective(@Param("record") UserBtnRef record, @Param("example") UserBtnRefExample example);
 
     int updateByExample(@Param("record") UserBtnRef record, @Param("example") UserBtnRefExample example);
+
+    int updateByPrimaryKeySelective(UserBtnRef record);
+
+    int updateByPrimaryKey(UserBtnRef record);
 }

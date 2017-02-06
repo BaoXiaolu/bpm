@@ -565,73 +565,63 @@ public class DicExample {
             return (Criteria) this;
         }
 
-        public Criteria andStatusIsNull() {
-            addCriterion("status is null");
+        public Criteria andIsDisableIsNull() {
+            addCriterion("is_disable is null");
             return (Criteria) this;
         }
 
-        public Criteria andStatusIsNotNull() {
-            addCriterion("status is not null");
+        public Criteria andIsDisableIsNotNull() {
+            addCriterion("is_disable is not null");
             return (Criteria) this;
         }
 
-        public Criteria andStatusEqualTo(String value) {
-            addCriterion("status =", value, "status");
+        public Criteria andIsDisableEqualTo(Boolean value) {
+            addCriterion("is_disable =", value, "isDisable");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotEqualTo(String value) {
-            addCriterion("status <>", value, "status");
+        public Criteria andIsDisableNotEqualTo(Boolean value) {
+            addCriterion("is_disable <>", value, "isDisable");
             return (Criteria) this;
         }
 
-        public Criteria andStatusGreaterThan(String value) {
-            addCriterion("status >", value, "status");
+        public Criteria andIsDisableGreaterThan(Boolean value) {
+            addCriterion("is_disable >", value, "isDisable");
             return (Criteria) this;
         }
 
-        public Criteria andStatusGreaterThanOrEqualTo(String value) {
-            addCriterion("status >=", value, "status");
+        public Criteria andIsDisableGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("is_disable >=", value, "isDisable");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLessThan(String value) {
-            addCriterion("status <", value, "status");
+        public Criteria andIsDisableLessThan(Boolean value) {
+            addCriterion("is_disable <", value, "isDisable");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLessThanOrEqualTo(String value) {
-            addCriterion("status <=", value, "status");
+        public Criteria andIsDisableLessThanOrEqualTo(Boolean value) {
+            addCriterion("is_disable <=", value, "isDisable");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLike(String value) {
-            addCriterion("status like", value, "status");
+        public Criteria andIsDisableIn(List<Boolean> values) {
+            addCriterion("is_disable in", values, "isDisable");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotLike(String value) {
-            addCriterion("status not like", value, "status");
+        public Criteria andIsDisableNotIn(List<Boolean> values) {
+            addCriterion("is_disable not in", values, "isDisable");
             return (Criteria) this;
         }
 
-        public Criteria andStatusIn(List<String> values) {
-            addCriterion("status in", values, "status");
+        public Criteria andIsDisableBetween(Boolean value1, Boolean value2) {
+            addCriterion("is_disable between", value1, value2, "isDisable");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotIn(List<String> values) {
-            addCriterion("status not in", values, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusBetween(String value1, String value2) {
-            addCriterion("status between", value1, value2, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusNotBetween(String value1, String value2) {
-            addCriterion("status not between", value1, value2, "status");
+        public Criteria andIsDisableNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("is_disable not between", value1, value2, "isDisable");
             return (Criteria) this;
         }
 

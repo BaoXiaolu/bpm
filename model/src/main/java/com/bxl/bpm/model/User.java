@@ -1,18 +1,48 @@
 package com.bxl.bpm.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.NotNull;
+
+/**
+ * 用户
+ */
 public class User {
     private Integer id;
 
+    /**
+     * 账号
+     */
+    @NotEmpty
     private String account;
 
+    /**
+     * 密码
+     */
+    @NotEmpty
     private String password;
 
+    /**
+     * 用户名
+     */
+    @NotEmpty
     private String username;
 
+    /**
+     * 是否超管
+     */
+    @NotNull
     private Boolean isAdmin;
 
+    /**
+     * 是否禁用
+     */
+    @NotNull
     private Boolean isDisable;
 
+    /**
+     * 备注
+     */
     private String remark;
 
     public Integer getId() {
@@ -52,7 +82,7 @@ public class User {
     }
 
     public void setIsAdmin(Boolean isAdmin) {
-        this.isAdmin = isAdmin;
+        this.isAdmin = isAdmin == null ? false : isAdmin;
     }
 
     public Boolean getIsDisable() {
@@ -60,7 +90,7 @@ public class User {
     }
 
     public void setIsDisable(Boolean isDisable) {
-        this.isDisable = isDisable;
+        this.isDisable = isDisable == null ? false : isDisable;
     }
 
     public String getRemark() {

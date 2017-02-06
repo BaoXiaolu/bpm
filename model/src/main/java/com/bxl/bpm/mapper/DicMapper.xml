@@ -2,14 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.bxl.bpm.dao.DicMapper" >
   <resultMap id="BaseResultMap" type="com.bxl.bpm.model.Dic" >
-    <result column="id" property="id" jdbcType="INTEGER" />
+    <id column="id" property="id" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="code" property="code" jdbcType="VARCHAR" />
     <result column="value" property="value" jdbcType="VARCHAR" />
     <result column="pid" property="pid" jdbcType="INTEGER" />
     <result column="category_id" property="categoryId" jdbcType="INTEGER" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
-    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="is_disable" property="isDisable" jdbcType="BIT" />
     <result column="sort" property="sort" jdbcType="INTEGER" />
     <result column="creater" property="createrId" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
@@ -75,7 +75,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, code, value, pid, category_id, remark, status, sort, creater, create_time, 
+    id, name, code, value, pid, category_id, remark, is_disable, sort, creater, create_time, 
     modifier, modified_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bxl.bpm.model.DicExample" >
@@ -92,6 +92,16 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_dic
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_dic
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
   <delete id="deleteByExample" parameterType="com.bxl.bpm.model.DicExample" >
     delete from sys_dic
     <if test="_parameter != null" >
@@ -104,12 +114,12 @@
     </selectKey>
     insert into sys_dic (id, name, code, 
       value, pid, category_id, 
-      remark, status, sort, 
+      remark, is_disable, sort, 
       creater, create_time, modifier, 
       modified_time)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
       #{value,jdbcType=VARCHAR}, #{pid,jdbcType=INTEGER}, #{categoryId,jdbcType=INTEGER}, 
-      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR}, #{isDisable,jdbcType=BIT}, #{sort,jdbcType=INTEGER}, 
       #{createrId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{modifierId,jdbcType=INTEGER}, 
       #{modifiedTime,jdbcType=TIMESTAMP})
   </insert>
@@ -138,8 +148,8 @@
       <if test="remark != null" >
         remark,
       </if>
-      <if test="status != null" >
-        status,
+      <if test="isDisable != null" >
+        is_disable,
       </if>
       <if test="sort != null" >
         sort,
@@ -177,8 +187,8 @@
       <if test="remark != null" >
         #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="status != null" >
-        #{status,jdbcType=VARCHAR},
+      <if test="isDisable != null" >
+        #{isDisable,jdbcType=BIT},
       </if>
       <if test="sort != null" >
         #{sort,jdbcType=INTEGER},
@@ -227,8 +237,8 @@
       <if test="record.remark != null" >
         remark = #{record.remark,jdbcType=VARCHAR},
       </if>
-      <if test="record.status != null" >
-        status = #{record.status,jdbcType=VARCHAR},
+      <if test="record.isDisable != null" >
+        is_disable = #{record.isDisable,jdbcType=BIT},
       </if>
       <if test="record.sort != null" >
         sort = #{record.sort,jdbcType=INTEGER},
@@ -259,7 +269,7 @@
       pid = #{record.pid,jdbcType=INTEGER},
       category_id = #{record.categoryId,jdbcType=INTEGER},
       remark = #{record.remark,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=VARCHAR},
+      is_disable = #{record.isDisable,jdbcType=BIT},
       sort = #{record.sort,jdbcType=INTEGER},
       creater = #{record.createrId,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -268,5 +278,63 @@
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bxl.bpm.model.Dic" >
+    update sys_dic
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null" >
+        value = #{value,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null" >
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId != null" >
+        category_id = #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="isDisable != null" >
+        is_disable = #{isDisable,jdbcType=BIT},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="createrId != null" >
+        creater = #{createrId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifierId != null" >
+        modifier = #{modifierId,jdbcType=INTEGER},
+      </if>
+      <if test="modifiedTime != null" >
+        modified_time = #{modifiedTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bxl.bpm.model.Dic" >
+    update sys_dic
+    set name = #{name,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      value = #{value,jdbcType=VARCHAR},
+      pid = #{pid,jdbcType=INTEGER},
+      category_id = #{categoryId,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      is_disable = #{isDisable,jdbcType=BIT},
+      sort = #{sort,jdbcType=INTEGER},
+      creater = #{createrId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modifier = #{modifierId,jdbcType=INTEGER},
+      modified_time = #{modifiedTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

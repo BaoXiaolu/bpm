@@ -1,14 +1,31 @@
 package com.bxl.bpm.model;
 
+import javax.validation.constraints.NotNull;
+import java.sql.Timestamp;
 import java.util.Date;
 
+/**
+ * 操作日志
+ */
 public class Log {
     private Integer id;
 
+    /**
+     * 操作类型
+     */
+    @NotNull
     private Integer operationType;
 
+    /**
+     * 操作者Id
+     */
+    @NotNull
     private Integer operatorId;
 
+    /**
+     * 操作时间
+     */
+    @NotNull
     private Date operationTime;
 
     private String tableName;
@@ -19,6 +36,10 @@ public class Log {
 
     private String bizSql;
 
+    /**
+     * 操作者Ip
+     */
+    @NotNull
     private String operationIp;
 
     public Integer getId() {
@@ -50,7 +71,7 @@ public class Log {
     }
 
     public void setOperationTime(Date operationTime) {
-        this.operationTime = operationTime;
+        this.operationTime = operationTime == null ? new Timestamp(System.currentTimeMillis()) : operationTime ;
     }
 
     public String getTableName() {

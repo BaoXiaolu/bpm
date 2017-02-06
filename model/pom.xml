@@ -36,8 +36,11 @@
         <mybatis.spring.version>1.3.1</mybatis.spring.version>
         <spring.version>4.3.6.RELEASE</spring.version>
         <druid.version>1.0.27</druid.version>
-        <com.bxl.common.version>1.0.0</com.bxl.common.version>
+        <com.bxl.common.version>1.0.1</com.bxl.common.version>
         <log4j.version>1.2.17</log4j.version>
+        <javax.validation.version>1.1.0.Final</javax.validation.version>
+        <hibernate.validator.version>5.4.0.Final</hibernate.validator.version>
+        <javax.el.version>3.0.0</javax.el.version>
 
     </properties>
 
@@ -133,13 +136,40 @@
         </dependency>
         <!-- log end -->
 
+        <!--javax validation start-->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>${javax.validation.version}</version>
+            <!--<scope>test</scope>-->
+        </dependency>
+        <dependency>
+            <groupId>javax.el</groupId>
+            <artifactId>javax.el-api</artifactId>
+            <version>${javax.el.version}</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>javax.el</artifactId>
+            <version>2.2.6</version>
+            <optional>true</optional>
+        </dependency>
+        <!--javax validation end-->
+
+        <!-- hibernate-validator -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${hibernate.validator.version}</version>
+        </dependency>
+
         <!-- bxl -->
         <dependency>
             <groupId>com.bxl</groupId>
             <artifactId>bxl-common</artifactId>
             <version>${com.bxl.common.version}</version>
         </dependency>
-
 
 
     </dependencies>

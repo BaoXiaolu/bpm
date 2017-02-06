@@ -12,13 +12,21 @@ public interface SysNavigationMapper extends GenericDao<SysNavigation, Integer> 
 
     int deleteByExample(SysNavigationExample example);
 
+    int deleteByPrimaryKey(Integer id);
+
     int insert(SysNavigation record);
 
     int insertSelective(SysNavigation record);
 
     List<SysNavigation> selectByExample(SysNavigationExample example);
 
+    SysNavigation selectByPrimaryKey(Integer id);
+
     int updateByExampleSelective(@Param("record") SysNavigation record, @Param("example") SysNavigationExample example);
 
     int updateByExample(@Param("record") SysNavigation record, @Param("example") SysNavigationExample example);
+
+    int updateByPrimaryKeySelective(SysNavigation record);
+
+    int updateByPrimaryKey(SysNavigation record);
 }

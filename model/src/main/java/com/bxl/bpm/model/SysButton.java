@@ -1,26 +1,66 @@
 package com.bxl.bpm.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.NotNull;
+import java.sql.Timestamp;
 import java.util.Date;
 
+/**
+ * 系统操作
+ */
 public class SysButton {
     private Integer id;
 
+    /**
+     * 系统操作名称
+     */
+    @NotEmpty
     private String name;
 
+    /**
+     * 系统操作代码
+     */
+    @NotEmpty
     private String code;
 
+    /**
+     * 系统操作图标
+     */
     private String iconCls;
 
+    /**
+     * 图标路径
+     */
     private String iconUrl;
 
+    /**
+     * 备注
+     */
     private String remark;
 
+    /**
+     * 创建者Id
+     */
+    @NotNull
     private Integer createrId;
 
+    /**
+     * 创建时间
+     */
+    @NotNull
     private Date createTime;
 
+    /**
+     * 修改者Id
+     */
+    @NotNull
     private Integer modifierId;
 
+    /**
+     * 修改时间
+     */
+    @NotNull
     private Date modifiedTime;
 
     public Integer getId() {
@@ -84,7 +124,7 @@ public class SysButton {
     }
 
     public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+        this.createTime = createTime == null ? new Timestamp(System.currentTimeMillis()) : createTime;
     }
 
     public Integer getModifierId() {
@@ -100,6 +140,6 @@ public class SysButton {
     }
 
     public void setModifiedTime(Date modifiedTime) {
-        this.modifiedTime = modifiedTime;
+        this.modifiedTime = modifiedTime == null ? new Timestamp(System.currentTimeMillis()) : modifiedTime;
     }
 }

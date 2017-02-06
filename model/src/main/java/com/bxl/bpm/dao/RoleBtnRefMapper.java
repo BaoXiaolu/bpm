@@ -12,13 +12,21 @@ public interface RoleBtnRefMapper extends GenericDao<RoleBtnRef, Integer> {
 
     int deleteByExample(RoleBtnRefExample example);
 
+    int deleteByPrimaryKey(Integer id);
+
     int insert(RoleBtnRef record);
 
     int insertSelective(RoleBtnRef record);
 
     List<RoleBtnRef> selectByExample(RoleBtnRefExample example);
 
+    RoleBtnRef selectByPrimaryKey(Integer id);
+
     int updateByExampleSelective(@Param("record") RoleBtnRef record, @Param("example") RoleBtnRefExample example);
 
     int updateByExample(@Param("record") RoleBtnRef record, @Param("example") RoleBtnRefExample example);
+
+    int updateByPrimaryKeySelective(RoleBtnRef record);
+
+    int updateByPrimaryKey(RoleBtnRef record);
 }

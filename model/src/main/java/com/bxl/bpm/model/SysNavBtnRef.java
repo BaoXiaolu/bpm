@@ -1,10 +1,22 @@
 package com.bxl.bpm.model;
 
+import javax.validation.constraints.NotNull;
+
+/**
+ * 菜单权限
+ */
 public class SysNavBtnRef {
     private Integer id;
 
+    /**
+     * 菜单Id
+     */
+    @NotNull
     private Integer navId;
 
+    /**
+     * 按钮Id
+     */
     private Integer btnId;
 
     public Integer getId() {
